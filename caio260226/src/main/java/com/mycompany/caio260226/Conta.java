@@ -13,6 +13,20 @@ public class Conta {
     private double saldo, limite;
     private int agencia, numero;
 
+    public Conta() {
+    }
+
+    public Conta(int agencia, int numero, double saldo, double limite) {
+        this.saldo = saldo;
+        this.limite = limite;
+        this.agencia = agencia;
+        this.numero = numero;
+    }
+
+    public double getSaldoDisponivel(){
+        return saldo + limite;
+    }
+    
     /**
      * @return the saldo
      */
@@ -69,5 +83,28 @@ public class Conta {
         this.numero = numero;
     }
     
+    public void creditar(double valor){
+        saldo += valor;
+    }
+    
+    public boolean debitar(double valor){
+        if(valor <= getSaldoDisponivel()){
+            saldo -= valor;
+            return true;
+        }else{
+            System.out.println("Saldo Insuficiente!");
+            return false;
+    }
+    }
+    
+    public boolean transferir(Conta destino, double valor){
+        if(this.debitar(valor)){
+            destino.creditar(valor);
+            return true;
+        }else{
+             System.out.println("Transferencia não realizada!");
+            return false;
+        }
+    }
     
 }

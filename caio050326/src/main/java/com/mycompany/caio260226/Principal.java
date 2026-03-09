@@ -13,28 +13,41 @@ public class Principal {
 
     public static void main(String[] args) {
         
-        int a;
-        int i = Integer.parseInt(JOptionPane.showInputDialog("Quantas contas você quer?"));
+        int a = 0;
         
-        int[] agencia = new int[i];
-        int[] numero = new int[i];
-        double[] saldo = new double[i];
-        double[] limite = new double[i];
-        Conta[] c = new Conta[i];
+        int[] agencia = new int[1000];
+        int[] numero = new int[1000];
+        double[] saldo = new double[1000];
+        double[] limite = new double[1000];
+        Conta[] c = new Conta[1000];
         
-        for(a = 0; a < i; a++){
-        agencia[a] = Integer.parseInt(JOptionPane.showInputDialog("Digite a agencia da conta" + (a + 1)));
+        int menu = Integer.parseInt(JOptionPane.showInputDialog("Escolha:\n 0- encerra o proprama. \n 1- registra uma conta. \n 2- debitar"));
         
-        numero[a] = Integer.parseInt(JOptionPane.showInputDialog("Digite o numero da conta" + (a + 1)));
+        while(menu != 0){
+            if(menu == 1){
+        agencia[a] = Integer.parseInt(JOptionPane.showInputDialog("Digite a agencia da conta " + (a + 1)));
         
-        saldo[a] = Double.parseDouble(JOptionPane.showInputDialog("Digite o Saldo da conta" + (a + 1)));
+        numero[a] = Integer.parseInt(JOptionPane.showInputDialog("Digite o numero da conta " + (a + 1)));
         
-        limite[a] = Double.parseDouble(JOptionPane.showInputDialog("Digite o limite da conta" + (a + 1)));
+        saldo[a] = Double.parseDouble(JOptionPane.showInputDialog("Digite o Saldo da conta " + (a + 1)));
+        
+        limite[a] = Double.parseDouble(JOptionPane.showInputDialog("Digite o limite da conta " + (a + 1)));
         
         c[a] = new Conta(agencia[a], numero[a], saldo[a], limite[a]);
-        }
         
-        c[0].transferir(c[1], 10000);
-      
+        a++;}else if(menu == 2){
+            int conta = Integer.parseInt(JOptionPane.showInputDialog("Digite conta que você quer debitar:"));
+            int valor = Integer.parseInt(JOptionPane.showInputDialog("Digite o valor que você quer debitar:"));
+            
+            c[conta - 1].debitar(valor);
+        } else if(menu == 3){
+            int conta = Integer.parseInt(JOptionPane.showInputDialog("Digite conta que você quer creditar:"));
+            int valor = Integer.parseInt(JOptionPane.showInputDialog("Digite o valor que você quer creditar:"));
+            
+            
+            c[conta - 1].creditar(valor);
+        }
+            menu = Integer.parseInt(JOptionPane.showInputDialog("Escolha: 0- encerra o proprama. \n 1- registra uma conta. \n 2- debitar"));
+        }
     }
 }
